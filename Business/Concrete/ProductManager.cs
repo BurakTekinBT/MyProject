@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Business.Concrete
-{
+{ // arayüzden bir şeyler gönderiyoruz burada.
     public class ProductManager : IProcudtService
     {
         IProductDal _productDal;
@@ -24,6 +24,16 @@ namespace Business.Concrete
             //iş kodları //bir iş sınıfı başka bir iş sınıfını newlemez
             //InMemoryProductDal inMemoryProductDal = new InMemoryProductDal(); //ileriye dönük sıkıntı olur
             //Bu sayede sadece bellekte çalışır geliştirme tarafı sağlıklı olmaz
+        }
+
+        public List<Product> GetAllByCategoryId(int id)
+        {
+            return _productDal.GetAll(p => p.CategoryId == id);
+        }
+
+        public List<Product> GetByUnitPrice(decimal min, decimal max)
+        {
+            return _productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <=max);
         }
     }
 }
