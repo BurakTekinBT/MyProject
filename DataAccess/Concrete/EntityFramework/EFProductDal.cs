@@ -17,7 +17,10 @@ namespace DataAccess.Concrete.EntityFramework
             //NorthwindContext newlesek de olur ama using daha performanslı
             //USing UDispossable pattern implementasyonu olarak geçer
             using (NorthwindContext context= new NorthwindContext()) //işi bitince direkt garbage collectere gidip kendini bellekten attırır. Newlemekten daha masraflı.
-            {
+            {//2.yol context.Producst.Add(product);
+                //context.SaveChanges();
+
+
                 //git veri kaynağından benim bu gönderdiğim producta nesneyi eşleştir
                 var addedEntity = context.Entry(entity);  
                 addedEntity.State = EntityState.Added;
@@ -29,6 +32,11 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (NorthwindContext context = new NorthwindContext()) 
             {
+                //2.yol
+                //context.Products.Remove(context.Products.SingleOrDefault(p=> p.ProductId == product.ProductId);
+               
+                //context.SaveChanges();
+
                 //git veri kaynağından benim bu gönderdiğim producta nesneyi eşleştir
                 var deletedEntity = context.Entry(entity);
                 deletedEntity.State = EntityState.Deleted;
@@ -59,7 +67,10 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (NorthwindContext context = new NorthwindContext())
             {
-                
+                //2.yol
+                //var productToUpdate = context.Products.SingleOrDefault/p=> p.ProductId == product.ProductId);
+                //productToUpdate.ProductName = product.ProductName
+                //context.SaveChanges();
                 var updatedEntity = context.Entry(entity);
                 updatedEntity.State = EntityState.Modified;
                 context.SaveChanges();  
