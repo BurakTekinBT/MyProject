@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    public interface ICategoryDal : IEntityRepository<Category> //Ientity repository'i category için 
-                                                         //çalıştırdın
+    public interface IOrderDal: IEntityRepository<Order>
     {
 
     }

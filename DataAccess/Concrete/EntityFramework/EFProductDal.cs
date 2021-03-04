@@ -1,4 +1,5 @@
-﻿using DataAccess.Abstract;
+﻿using Core.DataAccess.EntityFramework;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,71 +11,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EFProductDal : IProductDal
+    public class EFProductDal : EfEntityRepositoryBase<Product, NorthwindContext>, IProductDal
     {
-        public void Add(Product entity)
-        {
-            //NorthwindContext newlesek de olur ama using daha performanslı
-            //USing UDispossable pattern implementasyonu olarak geçer
-            using (NorthwindContext context= new NorthwindContext()) //işi bitince direkt garbage collectere gidip kendini bellekten attırır. Newlemekten daha masraflı.
-            {//2.yol context.Producst.Add(product);
-                //context.SaveChanges();
 
-
-                //git veri kaynağından benim bu gönderdiğim producta nesneyi eşleştir
-                var addedEntity = context.Entry(entity);  
-                addedEntity.State = EntityState.Added;
-                context.SaveChanges(); // 1. referansı yakalı, o aslında eklenelecek bir nesne ve ekle. 
-            }
-        }
-
-        public void Delete(Product entity)
-        {
-            using (NorthwindContext context = new NorthwindContext()) 
-            {
-                //2.yol
-                //context.Products.Remove(context.Products.SingleOrDefault(p=> p.ProductId == product.ProductId);
-               
-                //context.SaveChanges();
-
-                //git veri kaynağından benim bu gönderdiğim producta nesneyi eşleştir
-                var deletedEntity = context.Entry(entity);
-                deletedEntity.State = EntityState.Deleted;
-                context.SaveChanges(); // 1. referansı yakalı, o aslında eklenelecek bir nesne ve ekle. 
-            }
-        }
-
-        public Product Get(Expression<Func<Product, bool>> filter)
-        {
-            using (NorthwindContext context = new NorthwindContext())
-            {
-                //Product tablosuna yerleş ve filter yoksa productı listele
-                return context.Set<Product>().SingleOrDefault(filter); // bu bir product döndürür
-            }
-        }
-
-        public List<Product> GetAll(Expression<Func<Product, bool>> filter = null) //buradaki parametre bildiğimiz landa
-        {
-            using(NorthwindContext context = new NorthwindContext())
-            {
-                //Product tablosuna yerleş ve filter yoksa productı listele
-                return filter == null ? context.Set<Product>().ToList() 
-                    : context.Set<Product>().Where(filter).ToList();
-            }
-        }
-
-        public void Update(Product entity)
-        {
-            using (NorthwindContext context = new NorthwindContext())
-            {
-                //2.yol
-                //var productToUpdate = context.Products.SingleOrDefault/p=> p.ProductId == product.ProductId);
-                //productToUpdate.ProductName = product.ProductName
-                //context.SaveChanges();
-                var updatedEntity = context.Entry(entity);
-                updatedEntity.State = EntityState.Modified;
-                context.SaveChanges();  
-            }
-        }
     }
 }

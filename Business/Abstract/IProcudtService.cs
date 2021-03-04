@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    interface IProcudtService
+    public interface IProcudtService //dış dünyaya servis edeceğimiz şeyler
     {
         List<Product> GetAll();
-        List<Product> GetAllByCategoryId(int id);
+        Product GetAllByCategoryId(int id);
 
         List<Product> GetByUnitPrice(decimal min, decimal max);
     }
