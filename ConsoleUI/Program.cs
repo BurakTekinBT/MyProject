@@ -10,8 +10,10 @@ namespace ConsoleUI
 
         static void Main(string[] args)
         {
-            //ProductTest();
-            CategoryTest();
+            //Data Tranformation Object DTO - 
+            //IoC
+            ProductTest();
+            //CategoryTest();
         }
 
         private static void CategoryTest()
@@ -28,15 +30,20 @@ namespace ConsoleUI
         {
             ProductManager productManager = new ProductManager(new EFProductDal());
 
-            foreach (var product in productManager.GetAllByCategoryId(2))
+            foreach (var product in productManager.GetProductDetails())
             {
-                Console.WriteLine(product.ProductName + " " + product.CategoryId);
+                Console.WriteLine(product.ProductName + " " + product.CategoryName);
             }
 
-            foreach (var product in productManager.GetByUnitPrice(40, 100))
-            {
-                Console.WriteLine(product.ProductName + " " + product.UnitPrice);
-            }
+            //foreach (var product in productManager.GetAllByCategoryId(2))
+            //{
+            //    Console.WriteLine(product.ProductName + " " + product.CategoryId);
+            //}
+
+            //foreach (var product in productManager.GetByUnitPrice(40, 100))
+            //{
+            //    Console.WriteLine(product.ProductName + " " + product.UnitPrice);
+            //}
         }
     }
 }

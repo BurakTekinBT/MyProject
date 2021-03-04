@@ -1,5 +1,6 @@
 ﻿using Core.DataAccess;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace DataAccess.Abstract
 
     //interfacein operasyonları public olur kendisine ayrı public atamak lazım
     {
+        List<ProductDetailDto> GetProductDetails();
         //List<Product> GetAll();
         //// burada product'ı referanslamamız lazım Entitities'i biz kullanacağız DAL olarak biz entity'e bağımlıyız 
         //void Add(Product product);
