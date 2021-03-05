@@ -30,10 +30,10 @@ namespace ConsoleUI
         {
             ProductManager productManager = new ProductManager(new EFProductDal());
 
-            foreach (var product in productManager.GetProductDetails())
-            {
-                Console.WriteLine(product.ProductName + " " + product.CategoryName);
-            }
+            //foreach (var product in productManager.GetProductDetails())
+            //{
+            //    Console.WriteLine(product.ProductName + " " + product.CategoryName);
+            //}
 
             //foreach (var product in productManager.GetAllByCategoryId(2))
             //{
