@@ -20,20 +20,30 @@ namespace ConsoleUI
         {
             CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
 
-            foreach (var item in categoryManager.GetAll())
-            {
-                Console.WriteLine(item.CategoryName);
-            }
+            //foreach (var item in categoryManager.GetAll())
+            //{
+            //    Console.WriteLine(item.CategoryName);
+            //}
         }
 
         private static void ProductTest()
         {
             ProductManager productManager = new ProductManager(new EFProductDal());
+            var result = productManager.GetProductDetails();
 
-            //foreach (var product in productManager.GetProductDetails())
-            //{
-            //    Console.WriteLine(product.ProductName + " " + product.CategoryName);
-            //}
+            if (result.Success == true)
+            {
+                foreach (var product in result.Data)
+                {
+                    Console.WriteLine(product.ProductName + " " + product.CategoryName);
+                }
+            }
+
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+            
 
             //foreach (var product in productManager.GetAllByCategoryId(2))
             //{
