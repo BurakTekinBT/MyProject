@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IProcudtService //dış dünyaya servis edeceğimiz şeyler
+    public interface IProductService //dış dünyaya servis edeceğimiz şeyler
     {
         IResult Add(Product product);
         IDataResult<List<Product>> GetAll();

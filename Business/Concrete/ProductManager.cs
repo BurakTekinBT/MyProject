@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 { // arayüzden bir şeyler gönderiyoruz burada.
-    public class ProductManager : IProcudtService
+    public class ProductManager : IProductService
     {
         IProductDal _productDal;
 
@@ -33,7 +33,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Product>> GetAll()
         {
-            if(DateTime.Now.Hour == 22)
+            if(DateTime.Now.Hour == 11)
             {
                 return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
             }
